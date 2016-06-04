@@ -1,0 +1,20 @@
+language: python
+python:
+  - "3.5.1"
+
+env:
+  - DJANGO=1.8.4 MIGRATE='./manage.py migrate'
+
+script:
+  - python manage.py migrate
+
+# command to install dependencies
+install:
+  - pip install coveralls
+
+# command to run tests
+script:
+  - coverage run manage.py test BlogDAS/ -v 2
+
+after_success:
+  - coveralls
