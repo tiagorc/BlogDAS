@@ -1,5 +1,7 @@
 # Blog - Desenvolvimento Avançado de Software
 
+[![Build Status](https://travis-ci.org/Themakew/BlogDAS.svg?branch=master)](https://travis-ci.org/Themakew/BlogDAS)
+
 Universidade de Brasília
 * Caíque
 * Euler
