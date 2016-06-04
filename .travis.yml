@@ -1,15 +1,17 @@
 language: python
 python:
+  - "3.4.3"
   - "3.5.1"
 
 env:
-  - DJANGO=1.8.4 MIGRATE='./manage.py migrate'
+  - DJANGO=1.8.5 MIGRATE='./manage.py migrate'
 
 script:
   - python manage.py migrate
 
 # command to install dependencies
 install:
+  - pip install -r requirements.txt
   - pip install coveralls
 
 # command to run tests
