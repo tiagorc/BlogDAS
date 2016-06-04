@@ -10,9 +10,11 @@ def post_list(request):
                                 timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
-def post_detail (request, pk):
+
+def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
 
 @login_required
 def post_new(request):
@@ -28,6 +30,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
+
 @login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -42,3 +45,10 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+@login_required
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('blog.views.post_list')
