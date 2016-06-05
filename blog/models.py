@@ -2,11 +2,17 @@ from django.db import models
 from django.utils import timezone
 
 
+class TimestampedMixin(models.Model):
+    created_date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        abstract = True
+
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
@@ -21,7 +27,6 @@ class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
     author = models.CharField(max_length=200)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
 
     def approve(self):

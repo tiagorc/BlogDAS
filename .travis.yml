@@ -1,7 +1,7 @@
 language: python
 python:
-  - "3.4.3"
-  - "3.5.1"
+  - "3.4"
+  - "3.5"
 
 env:
   - DJANGO=1.8.5 MIGRATE='./manage.py migrate'
