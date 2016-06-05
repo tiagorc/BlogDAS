@@ -1,1 +1,2 @@
 LOGIN_REDIRECT_URL = '/'
+AUTH_PROFILE_MODULE = 'blog.UserProfile'
