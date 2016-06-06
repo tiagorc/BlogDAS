@@ -38,9 +38,3 @@ class Comment(models.Model):
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField('auth.User', related_name='profile')
-    phone_number = models.CharField(max_length=20)
-    address = models.CharField(max_length=100)
