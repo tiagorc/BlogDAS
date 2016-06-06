@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <div class="save">
+      <a class="btn btn-default" href="{% url 'user_edit' %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+    <h1>Dados do usuário</h1>
+    <p>{{ user.email }}</p>
+    <p>Telefone: {{ user.profile.phone_number }}</p>
+    <p>Endereço: {{ user.profile.address }}</p>
+    <hr>
+  {% endif %}
+{% endblock %}
