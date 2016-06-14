@@ -9,8 +9,20 @@ Universidade de Brasília
 * Maxwell
 * Ruyther
 
-# Running the development server
+# Make migrations
+```bash
+$ python manage.py makemigrations
+```
+```bash
+$ python manage.py migrate
+```
 
+# Running the development server
 ```bash
 $ ./manage.py runserver
+```
+
+#Running tests
+```bash
+coverage run manage.py test BlogDAS/ -v 2
 ```

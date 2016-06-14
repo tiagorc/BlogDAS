@@ -2,14 +2,14 @@ from django.db import models
 from django.utils import timezone
 
 
-class TimestampedMixin(models.Model):
+class TimeStampedMixin(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
 
     class Meta:
         abstract = True
 
 
-class Post(models.Model):
+class Post(TimeStampedMixin):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()
@@ -23,7 +23,7 @@ class Post(models.Model):
         return self.title
 
 
-class Comment(models.Model):
+class Comment(TimeStampedMixin):
     post = models.ForeignKey('blog.Post', related_name='comments')
     author = models.CharField(max_length=200)
     text = models.TextField()
