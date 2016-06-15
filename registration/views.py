@@ -1,12 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
-from django.contrib.auth.models import User
 
 
 @login_required
 def user_detail(request):
     return render(request, 'registration/user_detail.html')
+
 
 @login_required
 def user_edit(request):
