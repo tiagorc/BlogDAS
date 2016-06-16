@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/Themakew/BlogDAS.svg?branch=master)](https://travis-ci.org/Themakew/BlogDAS)
 [![Coverage Status](https://coveralls.io/repos/github/Themakew/BlogDAS/badge.svg?branch=master)](https://coveralls.io/github/Themakew/BlogDAS?branch=master)
 
+Visit our website [Here](http://blogdas.pythonanywhere.com)! ;)
+
 Universidade de Brasília
 * Caíque
 * Euler
@@ -22,7 +24,7 @@ $ python manage.py migrate
 $ ./manage.py runserver
 ```
 
-#Running tests
+# Running tests
 ```bash
 coverage run manage.py test BlogDAS/ -v 2
 ```
