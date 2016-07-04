@@ -3,14 +3,44 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.dispatch import Signal
+from django.core.mail import send_mail
 from .models import Post
 from .models import Comment
 from .forms import PostForm
 from .forms import CommentForm
+from pkg_resources import iter_entry_points
+
+
+# Register the Signal
+email_signal = Signal(providing_args=['author', 'text'])
+
+
+# Define a receiver method
+def send_not_aproved_email_receiver(**kwargs):
+    author, text = kwargs['author'], kwargs['text']
+
+    send_mail('You have a new comment to aprove.',
+              '\nThe following message needs aprove:\n\nAuthor: ' + author + '\nComment: ' + text,
+              author,
+              ['ruyther@me.com'],
+              fail_silently=False,
+              )
+
+# Connect the receiver with the log_it
+email_signal.connect(send_not_aproved_email_receiver)
 
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    ######
+    for entry_point in iter_entry_points(group='cms.plugin', name=None):
+        print(entry_point)
+
+    available_methods = []
+    for entry_point in iter_entry_points(group='authkit.method', name=None):
+        available_methods.append(entry_point.load())
+    ######
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
@@ -65,6 +95,9 @@ def add_comment_to_post(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+            email_signal.send(sender='email_sender',
+                              author=comment.author,
+                              text=comment.text)
             return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = CommentForm()
